@@ -4,7 +4,7 @@ This roadmap is intentionally incremental. Each phase must leave the
 repository runnable, tested with small fixtures, and documented before the
 next phase begins.
 
-## Phase 0 — Architecture (current)
+## Phase 0 — Architecture
 
 - [x] Inspect the empty repository and safe runtime environment.
 - [x] Inspect available project skills.
@@ -14,13 +14,17 @@ next phase begins.
 - [x] Record architecture decisions and actionable tasks.
 - [ ] Add the missing subsystem skills before those subsystems are built.
 
-## Phase 1 — Skeleton and Developer Workflow
+## Phase 1 — Skeleton and Developer Workflow (verification gate pending)
 
-- [ ] Create the Python package and configuration model.
-- [ ] Add structured logging and a lifecycle supervisor.
-- [ ] Add CLI command routing and `nexus doctor`.
-- [ ] Add dependency manifests with minimal, justified dependencies.
-- [ ] Add test configuration and small-fixture conventions.
+- [x] Create the Python package and configuration model.
+- [x] Add structured logging and a lifecycle supervisor.
+- [x] Add CLI command routing and `nexus doctor`.
+- [x] Add dependency manifests with minimal, justified dependencies.
+- [x] Add test configuration and small-fixture conventions.
+- [x] Expand `nexus doctor` with structured, read-only system and capability
+  diagnostics.
+- [ ] Create the project-local `.venv`, install test dependencies, and pass
+  the verification gate.
 
 ## Phase 2 — Linux Observatory
 

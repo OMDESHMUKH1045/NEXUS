@@ -15,13 +15,15 @@ not speculative features.
 
 ## Foundation
 
-- [ ] Choose package layout and Python build metadata.
-- [ ] Define typed configuration for paths, limits, intervals, and execution
+- [x] Choose package layout and Python build metadata.
+- [x] Define typed configuration for paths, limits, intervals, and execution
   modes.
-- [ ] Define structured log schema with component, experiment, and job fields.
-- [ ] Define application supervisor and shutdown contracts.
-- [ ] Add CLI entry point and useful `doctor` diagnostics.
-- [ ] Add dependency lock/update policy without installing system packages.
+- [x] Define structured log schema with component, experiment, and job fields.
+- [x] Define application supervisor and shutdown contracts.
+- [x] Add CLI entry point and structured, read-only `doctor` diagnostics.
+- [x] Add dependency manifest and test extra without installing system packages.
+- [ ] Create project-local `.venv`, install test dependencies, and pass the
+  Phase 1 verification gate.
 
 ## Observatory
 
