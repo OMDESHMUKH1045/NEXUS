@@ -14,7 +14,7 @@ next phase begins.
 - [x] Record architecture decisions and actionable tasks.
 - [ ] Add the missing subsystem skills before those subsystems are built.
 
-## Phase 1 — Skeleton and Developer Workflow (verification gate pending)
+## Phase 1 — Skeleton and Developer Workflow (complete)
 
 - [x] Create the Python package and configuration model.
 - [x] Add structured logging and a lifecycle supervisor.
@@ -23,17 +23,20 @@ next phase begins.
 - [x] Add test configuration and small-fixture conventions.
 - [x] Expand `nexus doctor` with structured, read-only system and capability
   diagnostics.
-- [ ] Create the project-local `.venv`, install test dependencies, and pass
+- [x] Create the project-local `.venv`, install test dependencies, and pass
   the verification gate.
 
-## Phase 2 — Linux Observatory
+## Phase 2 — Linux Observatory (complete; verification passed)
 
-- [ ] Implement safe system, process, disk, memory, load, thermal, DRM, and
-  capability readers.
-- [ ] Represent unavailable metrics explicitly.
-- [ ] Add bounded sampling, live events, batched persistence, and overhead
-  measurements.
-- [ ] Test with mocked `/proc` and `/sys` data plus missing-sensor cases.
+- [x] Implement safe system, process, memory, load, thermal, and capability
+  readers.
+- [x] Represent unavailable metrics explicitly.
+- [x] Add bounded sampling and live finite CLI observation; persistence remains
+  deferred.
+- [x] Test with mocked `/proc` and `/sys` data plus missing-sensor cases.
+- [x] Complete the Phase 2 verification gate, including the short manual
+  observation. Collector-overhead measurement is explicitly deferred; no
+  overhead claim is made.
 
 ## Phase 3 — Dataset Engine
 

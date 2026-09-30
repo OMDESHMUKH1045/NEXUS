@@ -13,7 +13,7 @@ not speculative features.
 - [ ] Create or obtain missing project skills before implementing governed
   subsystems.
 
-## Foundation
+## Foundation (Phase 1 complete)
 
 - [x] Choose package layout and Python build metadata.
 - [x] Define typed configuration for paths, limits, intervals, and execution
@@ -22,19 +22,20 @@ not speculative features.
 - [x] Define application supervisor and shutdown contracts.
 - [x] Add CLI entry point and structured, read-only `doctor` diagnostics.
 - [x] Add dependency manifest and test extra without installing system packages.
-- [ ] Create project-local `.venv`, install test dependencies, and pass the
+- [x] Create project-local `.venv`, install test dependencies, and pass the
   Phase 1 verification gate.
 
-## Observatory
+## Observatory (Phase 2 complete; verification passed)
 
-- [ ] Define metric sample and availability models.
-- [ ] Implement `/proc` and psutil CPU/load/memory/process readers.
-- [ ] Implement `/proc/diskstats` or equivalent safe disk counters.
-- [ ] Implement hwmon discovery by labels.
-- [ ] Implement DRM/OpenCL capability adapters without requiring utilities.
-- [ ] Add bounded ring buffer and batched persistence interface.
-- [ ] Add observatory-overhead measurement.
-- [ ] Test absent and changing sensors.
+- [x] Define metric sample and availability models.
+- [x] Implement direct `/proc` and `/sys` CPU/load/memory/process readers.
+- [x] Implement read-only `/proc/diskstats` counters.
+- [x] Implement thermal discovery by labels.
+- [x] Preserve optional DRM/OpenCL capability adapters from Phase 1.
+- [x] Add bounded in-memory ring buffer; persistence is deferred.
+- [ ] Add observatory-overhead measurement (deferred; no overhead claim is
+  made in Phase 2).
+- [x] Test absent and changing sensors.
 
 ## Datasets
 

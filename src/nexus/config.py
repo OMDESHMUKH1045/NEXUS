@@ -13,6 +13,8 @@ class NexusConfig:
     queue_limit: int = 32
     shutdown_timeout_seconds: float = 10.0
     telemetry_interval_seconds: float = 1.0
+    telemetry_history_capacity: int = 300
+    telemetry_process_limit: int = 32
 
     def __post_init__(self) -> None:
         if self.worker_limit < 1:
@@ -23,6 +25,12 @@ class NexusConfig:
             raise ValueError("shutdown_timeout_seconds must be positive")
         if self.telemetry_interval_seconds <= 0:
             raise ValueError("telemetry_interval_seconds must be positive")
+        if not 0.25 <= self.telemetry_interval_seconds <= 5.0:
+            raise ValueError("telemetry_interval_seconds must be between 0.25 and 5.0")
+        if not 1 <= self.telemetry_history_capacity <= 100_000:
+            raise ValueError("telemetry_history_capacity must be between 1 and 100000")
+        if not 1 <= self.telemetry_process_limit <= 1000:
+            raise ValueError("telemetry_process_limit must be between 1 and 1000")
 
     @classmethod
     def from_environment(cls) -> "NexusConfig":
@@ -37,6 +45,8 @@ class NexusConfig:
             ("NEXUS_QUEUE_LIMIT", "queue_limit", int),
             ("NEXUS_SHUTDOWN_TIMEOUT", "shutdown_timeout_seconds", float),
             ("NEXUS_TELEMETRY_INTERVAL", "telemetry_interval_seconds", float),
+            ("NEXUS_TELEMETRY_HISTORY", "telemetry_history_capacity", int),
+            ("NEXUS_TELEMETRY_PROCESS_LIMIT", "telemetry_process_limit", int),
         ):
             if value := os.getenv(name):
                 try:
@@ -44,4 +54,3 @@ class NexusConfig:
                 except ValueError as exc:
                     raise ValueError(f"{name} must be a valid {converter.__name__}") from exc
         return cls(**values)
-

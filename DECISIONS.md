@@ -120,3 +120,17 @@ record with a reason.
 - **Consequence:** Missing skills are tracked as Phase 0/Phase 1 work. The
   currently available skills are `resource-safe-execution` and
   `measure-dont-guess`.
+
+## ADR-0011: Separate Static Diagnostics from Live Telemetry
+
+- **Status:** Accepted
+- **Decision:** Keep one-shot runtime/capability reporting in
+  `diagnostics.py`; expose timestamped live samples and bounded sampling under
+  `nexus.observatory`.
+- **Reason:** Static facts and changing measurements have different lifecycles
+  and consumers. Separation keeps the Phase 1 doctor command stable while
+  allowing sampler, API, scheduler, and storage layers to reuse immutable
+  telemetry records.
+- **Consequence:** Collectors return explicit unavailable values, the sampler
+  owns bounded history and lifecycle counters, and terminal formatting remains
+  in the CLI rather than in telemetry models.

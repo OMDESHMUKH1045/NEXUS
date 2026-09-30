@@ -2,11 +2,13 @@
 
 import argparse
 import sys
+import time
 
 from . import __version__
 from .config import NexusConfig
 from .diagnostics import DiagnosticReport, collect_diagnostics
 from .logging import configure_logging
+from .observatory import Sampler
 
 
 def _print_diagnostics(report: DiagnosticReport) -> None:
@@ -29,11 +31,46 @@ def _doctor(config: NexusConfig) -> int:
     return 0
 
 
+def _format_percent(value: float | None) -> str:
+    return "unavailable" if value is None else f"{value:.1f}%"
+
+
+def _observe(config: NexusConfig, interval: float, samples: int) -> int:
+    sampler = Sampler(interval, config.telemetry_history_capacity)
+    try:
+        for index in range(samples):
+            sample = sampler.collect_once()
+            if sample is None:
+                print("telemetry: unavailable")
+            else:
+                load = (sample.cpu.load_1m, sample.cpu.load_5m, sample.cpu.load_15m)
+                temperatures = ", ".join(
+                    f"{sensor.label or sensor.identifier}={sensor.celsius:.1f}C"
+                    for sensor in sample.thermal
+                ) or "unavailable"
+                pressure = sample.pressure_cpu.some_avg10 if sample.pressure_cpu else None
+                print(
+                    f"{sample.wall_timestamp.isoformat()} "
+                    f"cpu={_format_percent(sample.cpu.utilization_percent)} "
+                    f"load={load} memory={_format_percent(sample.memory.utilization_percent)} "
+                    f"swap={_format_percent(sample.memory.swap_utilization_percent)} "
+                    f"psi_cpu_some10={pressure!r} thermal={temperatures}"
+                )
+            if index < samples - 1:
+                time.sleep(interval)
+    except KeyboardInterrupt:
+        return 130
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="nexus", description="Local Compute and Data Observatory")
     parser.add_argument("--version", action="version", version=__version__)
     subparsers = parser.add_subparsers(dest="command")
     subparsers.add_parser("doctor", help="report local runtime diagnostics")
+    observe = subparsers.add_parser("observe", help="run a finite live telemetry session")
+    observe.add_argument("--interval", type=float, default=None)
+    observe.add_argument("--samples", type=int, default=5)
     return parser
 
 
@@ -47,6 +84,13 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(str(exc))
     if args.command == "doctor":
         return _doctor(config)
+    if args.command == "observe":
+        interval = config.telemetry_interval_seconds if args.interval is None else args.interval
+        if not 0.25 <= interval <= 5.0:
+            parser.error("--interval must be between 0.25 and 5.0 seconds")
+        if not 1 <= args.samples <= 1000:
+            parser.error("--samples must be between 1 and 1000")
+        return _observe(config, interval, args.samples)
     parser.print_help()
     return 0
 
