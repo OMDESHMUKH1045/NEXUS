@@ -38,13 +38,17 @@ next phase begins.
   observation. Collector-overhead measurement is explicitly deferred; no
   overhead claim is made.
 
-## Phase 3 — Dataset Engine
+## Phase 3 — Dataset Engine (complete; verification passed)
 
-- [ ] Add dataset registry, fingerprints, import validation, and metadata.
-- [ ] Support CSV, JSON/JSONL, Parquet, SQLite, and sensible DuckDB sources.
-- [ ] Add lazy profiling and memory estimates.
-- [ ] Add incremental Parquet generators with resource sufficiency warnings.
-- [ ] Test small representative fixtures.
+- [x] Add typed dataset metadata, fingerprints, import validation, and
+  resource estimates.
+- [x] Support streaming CSV, JSONL, and read-only SQLite sources.
+- [x] Add bounded streaming profiling.
+- [ ] Add generators and broader analytical source support (deferred).
+- [x] Add the first finite CPU profiling workload with Phase 2 telemetry
+  correlation.
+- [x] Test small representative fixtures.
+- [x] Complete the Phase 3 verification gate.
 
 ## Phase 4 — Analysis Engine
 

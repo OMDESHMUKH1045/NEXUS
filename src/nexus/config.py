@@ -15,6 +15,10 @@ class NexusConfig:
     telemetry_interval_seconds: float = 1.0
     telemetry_history_capacity: int = 300
     telemetry_process_limit: int = 32
+    fingerprint_chunk_size: int = 1024 * 1024
+    profile_inference_rows: int = 100
+    profile_sample_values: int = 5
+    profile_distinct_values: int = 32
 
     def __post_init__(self) -> None:
         if self.worker_limit < 1:
@@ -31,6 +35,14 @@ class NexusConfig:
             raise ValueError("telemetry_history_capacity must be between 1 and 100000")
         if not 1 <= self.telemetry_process_limit <= 1000:
             raise ValueError("telemetry_process_limit must be between 1 and 1000")
+        if not 1 <= self.fingerprint_chunk_size <= 16 * 1024 * 1024:
+            raise ValueError("fingerprint_chunk_size is out of bounds")
+        if not 1 <= self.profile_inference_rows <= 100_000:
+            raise ValueError("profile_inference_rows is out of bounds")
+        if not 0 <= self.profile_sample_values <= 1000:
+            raise ValueError("profile_sample_values is out of bounds")
+        if not 1 <= self.profile_distinct_values <= 100_000:
+            raise ValueError("profile_distinct_values is out of bounds")
 
     @classmethod
     def from_environment(cls) -> "NexusConfig":
@@ -47,6 +59,10 @@ class NexusConfig:
             ("NEXUS_TELEMETRY_INTERVAL", "telemetry_interval_seconds", float),
             ("NEXUS_TELEMETRY_HISTORY", "telemetry_history_capacity", int),
             ("NEXUS_TELEMETRY_PROCESS_LIMIT", "telemetry_process_limit", int),
+            ("NEXUS_FINGERPRINT_CHUNK_SIZE", "fingerprint_chunk_size", int),
+            ("NEXUS_PROFILE_INFERENCE_ROWS", "profile_inference_rows", int),
+            ("NEXUS_PROFILE_SAMPLE_VALUES", "profile_sample_values", int),
+            ("NEXUS_PROFILE_DISTINCT_VALUES", "profile_distinct_values", int),
         ):
             if value := os.getenv(name):
                 try:

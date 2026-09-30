@@ -134,3 +134,23 @@ record with a reason.
 - **Consequence:** Collectors return explicit unavailable values, the sampler
   owns bounded history and lifecycle counters, and terminal formatting remains
   in the CLI rather than in telemetry models.
+
+## ADR-0012: First Useful Workload Is Streaming Dataset Profiling
+
+- **Status:** Accepted
+- **Decision:** Phase 3 uses one finite, synchronous, CPU-only streaming
+  profiler for CSV, JSONL, and read-only SQLite sources.
+- **Reason:** It creates useful measurable work without introducing a
+  scheduler, broad analysis engine, or heavy data dependency.
+- **Consequence:** Profile state, samples, distinct values, and validation
+  errors are bounded; larger format and workload support remains deferred.
+
+## ADR-0013: Phase 3 Workloads Are Not Persisted
+
+- **Status:** Accepted
+- **Decision:** Phase 3 returns typed workload results and optional JSON output
+  but does not create an application database or persist telemetry.
+- **Reason:** Storage and experiment lifecycle are later phases, while typed
+  results are sufficient to establish the execution and measurement boundary.
+- **Consequence:** Future storage and API layers consume the result contract
+  without inheriting a premature persistence schema.

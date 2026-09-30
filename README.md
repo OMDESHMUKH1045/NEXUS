@@ -43,3 +43,26 @@ continue with those measurements unavailable.
 Phase 2 was manually verified with the project test suite, `nexus doctor`, and
 a five-sample observation session. Collector-overhead measurement is not yet
 implemented; NEXUS makes no claim about observer overhead.
+
+## Phase 3 dataset profiling
+
+NEXUS can run one finite, synchronous CPU workload against a local CSV,
+JSONL, or SQLite table:
+
+```bash
+nexus profile data.csv --json
+nexus profile data.csv --max-rows 100 --json
+nexus profile data.sqlite --table records --json
+```
+
+The profiler validates the source, computes a chunked SHA-256 fingerprint,
+streams rows without materializing the dataset, and returns bounded schema,
+null, numeric, sample, and distinct-value metadata with wall/monotonic timing.
+Mixed-type columns use deterministic lexical min/max values and report a null
+mean rather than an ambiguous numeric-subset mean. Primary workload timing
+covers source validation, fingerprinting, resource estimation, and profile
+scanning. The workload can collect a bounded Phase 2 telemetry window; only
+samples inside that workload's monotonic interval are summarized, and
+short workloads report insufficient coverage rather than fabricating
+utilization. SQLite sources are opened read-only and no application database
+or persistent telemetry is created.

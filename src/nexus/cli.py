@@ -1,6 +1,8 @@
 """NEXUS command-line entry point."""
 
 import argparse
+import json
+from pathlib import Path
 import sys
 import time
 
@@ -9,6 +11,9 @@ from .config import NexusConfig
 from .diagnostics import DiagnosticReport, collect_diagnostics
 from .logging import configure_logging
 from .observatory import Sampler
+from .datasets import DatasetSource
+from .datasets.sources import DatasetError, detect_format
+from .datasets.workloads import profile_dataset
 
 
 def _print_diagnostics(report: DiagnosticReport) -> None:
@@ -63,6 +68,27 @@ def _observe(config: NexusConfig, interval: float, samples: int) -> int:
     return 0
 
 
+def _profile(config: NexusConfig, path: str, table: str | None, max_rows: int | None, as_json: bool) -> int:
+    source_path = Path(path).expanduser()
+    format_name = detect_format(source_path)
+    result = profile_dataset(
+        DatasetSource(source_path, format_name, table),
+        max_rows=max_rows,
+        telemetry=True,
+        fingerprint_chunk_size=config.fingerprint_chunk_size,
+        inference_rows=config.profile_inference_rows,
+        sample_values=config.profile_sample_values,
+        distinct_values=config.profile_distinct_values,
+    )
+    if as_json:
+        print(json.dumps(result.as_dict(), sort_keys=True))
+    else:
+        print(f"{result.status}: {result.operation} {result.source.path}")
+        if result.error:
+            print(f"error: {result.error}")
+    return 0 if result.status == "completed" else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="nexus", description="Local Compute and Data Observatory")
     parser.add_argument("--version", action="version", version=__version__)
@@ -71,6 +97,11 @@ def build_parser() -> argparse.ArgumentParser:
     observe = subparsers.add_parser("observe", help="run a finite live telemetry session")
     observe.add_argument("--interval", type=float, default=None)
     observe.add_argument("--samples", type=int, default=5)
+    profile_parser = subparsers.add_parser("profile", help="profile a local dataset")
+    profile_parser.add_argument("path")
+    profile_parser.add_argument("--table")
+    profile_parser.add_argument("--max-rows", type=int)
+    profile_parser.add_argument("--json", action="store_true", dest="as_json")
     return parser
 
 
@@ -91,6 +122,13 @@ def main(argv: list[str] | None = None) -> int:
         if not 1 <= args.samples <= 1000:
             parser.error("--samples must be between 1 and 1000")
         return _observe(config, interval, args.samples)
+    if args.command == "profile":
+        if args.max_rows is not None and args.max_rows < 1:
+            parser.error("--max-rows must be at least 1")
+        try:
+            return _profile(config, args.path, args.table, args.max_rows, args.as_json)
+        except (DatasetError, OSError, ValueError) as exc:
+            parser.error(str(exc))
     parser.print_help()
     return 0
 

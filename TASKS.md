@@ -37,16 +37,18 @@ not speculative features.
   made in Phase 2).
 - [x] Test absent and changing sensors.
 
-## Datasets
+## Datasets (Phase 3 complete; verification passed)
 
-- [ ] Define dataset metadata and fingerprint models.
-- [ ] Implement import adapters for CSV, JSON, JSONL, Parquet, SQLite, and
-  DuckDB-compatible sources.
-- [ ] Implement lazy schema/profile collection.
-- [ ] Implement memory and disk requirement estimates.
-- [ ] Implement incremental e-commerce generator.
-- [ ] Add other useful generator families behind the same bounded interface.
-- [ ] Test malformed input and small fixtures.
+- [x] Define dataset metadata and fingerprint models.
+- [x] Implement streaming adapters for CSV, JSONL, and read-only SQLite.
+- [x] Implement bounded schema/profile collection.
+- [x] Implement conservative memory and disk requirement estimates.
+- [ ] Implement incremental e-commerce generator (out of scope for Phase 3).
+- [ ] Add other generator families (out of scope for Phase 3).
+- [x] Test malformed input and small fixtures.
+- [x] Add the finite `nexus profile` workload with Phase 2 telemetry
+  integration.
+- [x] Complete Phase 3 verification gate.
 
 ## Analysis
 
