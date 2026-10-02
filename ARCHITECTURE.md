@@ -62,8 +62,11 @@ coerce source values. Descriptive statistics use bounded Welford
 accumulation, exact quantiles use bounded materialization, Pearson uses
 streaming covariance accumulation, and Spearman uses exact bounded
 two-column ranking. Correlation results are typed and pairwise complete.
-Outliers, aggregation, time-series operations, transformations, execution
-backends, and scheduling remain deferred.
+Phase 4C adds synchronous CPU-only IQR, Z-score, and modified Z-score
+outlier summaries with exact bounded valid-value materialization. Outlier
+results are typed; per-row transformations and persistence are not part of
+the analysis boundary. Aggregation, time-series operations, transformations,
+execution backends, and scheduling remain deferred.
 
 ### Compute Backends
 

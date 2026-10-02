@@ -59,7 +59,9 @@ not speculative features.
 - [x] Define correlation result/status contracts (Phase 4B).
 - [x] Implement Pearson/Spearman correlation (Phase 4B).
 - [x] Add bounded correlation and CSV/JSONL/SQLite integration tests (Phase 4B).
-- [ ] Implement IQR, Z-score, and modified Z-score outliers.
+- [x] Define typed IQR, Z-score, and modified Z-score outlier contracts (Phase 4C).
+- [x] Implement bounded IQR, Z-score, and modified Z-score summaries (Phase 4C).
+- [x] Add outlier numerical, limit, and CSV/JSONL/SQLite integration tests (Phase 4C).
 - [ ] Implement group and multi-column aggregation.
 - [ ] Implement time-series resampling and rolling operations.
 - [ ] Implement transformations with deterministic behavior.

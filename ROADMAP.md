@@ -67,10 +67,15 @@ next phase begins.
 - [x] Implement streaming Pearson and exact bounded Spearman ranking.
 - [x] Add pairwise missingness, tie-ranking, source, and limit tests.
 
-- [ ] Implement outliers, aggregation, time-series operations, and
-  transformations.
-- [ ] Define operation input/output metadata and validation.
-- [ ] Add correctness tests against trusted small references.
+### Phase 4C — Outlier analysis (implemented)
+
+- [x] Define typed IQR, Z-score, and modified Z-score outlier results.
+- [x] Implement exact bounded univariate outlier summaries.
+- [x] Add numerical, missing-value, limit, and source integration tests.
+
+- [ ] Implement aggregation, time-series operations, and transformations.
+- [x] Define operation input/output metadata and validation across Phases 4A–4C.
+- [x] Add correctness tests against trusted small references across Phases 4A–4C.
 
 ## Phase 5 — Scheduler
 

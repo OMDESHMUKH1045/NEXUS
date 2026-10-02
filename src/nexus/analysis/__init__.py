@@ -25,6 +25,13 @@ from .operations import (
     descriptive_statistics,
     exact_quantile,
 )
+from .outliers import (
+    OutlierDetectionOperation,
+    OutlierMethod,
+    OutlierResult,
+    OutlierStatus,
+    detect_outliers,
+)
 
 __all__ = [
     "AnalysisError",
@@ -42,6 +49,10 @@ __all__ = [
     "InsufficientDataError",
     "InvalidAnalysisInputError",
     "OperationMetadata",
+    "OutlierDetectionOperation",
+    "OutlierMethod",
+    "OutlierResult",
+    "OutlierStatus",
     "PearsonCorrelationOperation",
     "SpearmanCorrelationOperation",
     "descriptive_statistics",
@@ -50,4 +61,5 @@ __all__ = [
     "from_source",
     "pearson_correlation",
     "spearman_correlation",
+    "detect_outliers",
 ]
