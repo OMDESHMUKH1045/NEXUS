@@ -61,8 +61,14 @@ next phase begins.
 - [x] Implement bounded Welford descriptive statistics and exact quantiles.
 - [x] Add focused contract, numerical, source-boundary, and limit tests.
 
-- [ ] Implement deterministic statistics, correlations, outliers,
-  aggregation, time-series operations, and transformations.
+### Phase 4B — Correlations (implemented)
+
+- [x] Add typed Pearson and Spearman correlation results and statuses.
+- [x] Implement streaming Pearson and exact bounded Spearman ranking.
+- [x] Add pairwise missingness, tie-ranking, source, and limit tests.
+
+- [ ] Implement outliers, aggregation, time-series operations, and
+  transformations.
 - [ ] Define operation input/output metadata and validation.
 - [ ] Add correctness tests against trusted small references.
 

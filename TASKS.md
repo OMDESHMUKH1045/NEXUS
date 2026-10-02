@@ -56,7 +56,9 @@ not speculative features.
 - [x] Implement descriptive statistics and quantiles (Phase 4A).
 - [x] Define the explicit Phase 3 to analysis-table typing boundary (Phase 4A).
 - [x] Add focused Phase 4A correctness and contract tests.
-- [ ] Implement Pearson/Spearman correlation.
+- [x] Define correlation result/status contracts (Phase 4B).
+- [x] Implement Pearson/Spearman correlation (Phase 4B).
+- [x] Add bounded correlation and CSV/JSONL/SQLite integration tests (Phase 4B).
 - [ ] Implement IQR, Z-score, and modified Z-score outliers.
 - [ ] Implement group and multi-column aggregation.
 - [ ] Implement time-series resampling and rolling operations.

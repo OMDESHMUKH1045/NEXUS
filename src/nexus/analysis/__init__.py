@@ -8,6 +8,15 @@ from .contracts import (
     ColumnSchema,
     OperationMetadata,
 )
+from .correlations import (
+    CorrelationMethod,
+    CorrelationResult,
+    CorrelationStatus,
+    PearsonCorrelationOperation,
+    SpearmanCorrelationOperation,
+    pearson_correlation,
+    spearman_correlation,
+)
 from .errors import AnalysisError, AnalysisLimitError, InsufficientDataError, InvalidAnalysisInputError
 from .operations import (
     DescriptiveStatistics,
@@ -24,14 +33,21 @@ __all__ = [
     "AnalysisOperation",
     "AnalysisTable",
     "ColumnSchema",
+    "CorrelationMethod",
+    "CorrelationResult",
+    "CorrelationStatus",
     "DescriptiveStatistics",
     "DescriptiveStatisticsOperation",
     "ExactQuantileOperation",
     "InsufficientDataError",
     "InvalidAnalysisInputError",
     "OperationMetadata",
+    "PearsonCorrelationOperation",
+    "SpearmanCorrelationOperation",
     "descriptive_statistics",
     "exact_quantile",
     "from_rows",
     "from_source",
+    "pearson_correlation",
+    "spearman_correlation",
 ]

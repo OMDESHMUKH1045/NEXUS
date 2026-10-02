@@ -55,12 +55,14 @@ incrementally to Parquet. It does not own job scheduling or UI concerns.
 
 ### Analysis Engine
 
-Phase 4A contains synchronous CPU operations over an explicit
+Phase 4A and Phase 4B contain synchronous CPU operations over an explicit
 `AnalysisTable`/`ColumnSchema` boundary. The Phase 3 CSV, JSONL, and SQLite
 readers are adapted once into typed values; operations do not infer or
 coerce source values. Descriptive statistics use bounded Welford
-accumulation, and exact quantiles use bounded materialization. Correlations,
-outliers, aggregation, time-series operations, transformations, execution
+accumulation, exact quantiles use bounded materialization, Pearson uses
+streaming covariance accumulation, and Spearman uses exact bounded
+two-column ranking. Correlation results are typed and pairwise complete.
+Outliers, aggregation, time-series operations, transformations, execution
 backends, and scheduling remain deferred.
 
 ### Compute Backends
