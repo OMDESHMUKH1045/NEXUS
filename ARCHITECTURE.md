@@ -12,16 +12,6 @@ This repository started empty apart from two project skills:
 - `resource-safe-execution`
 - `measure-dont-guess`
 
-The following related skills are not yet present and should be added before
-their subsystems are implemented:
-
-- `codebase-architect`
-- `linux-systems-observer`
-- `intel-opencl`
-- `data-engineering`
-- `fastapi-react`
-- `test-and-verify`
-
 The current host inspection was non-privileged:
 
 - Nobara Linux 44, Linux 7.2.6
@@ -65,10 +55,13 @@ incrementally to Parquet. It does not own job scheduling or UI concerns.
 
 ### Analysis Engine
 
-Contains deterministic analytical operations over an explicit table/column
-interface: statistics, correlations, outliers, aggregation, time-series
-operations, and transformations. Each operation reports input/output metadata
-and can be executed through a selected backend.
+Phase 4A contains synchronous CPU operations over an explicit
+`AnalysisTable`/`ColumnSchema` boundary. The Phase 3 CSV, JSONL, and SQLite
+readers are adapted once into typed values; operations do not infer or
+coerce source values. Descriptive statistics use bounded Welford
+accumulation, and exact quantiles use bounded materialization. Correlations,
+outliers, aggregation, time-series operations, transformations, execution
+backends, and scheduling remain deferred.
 
 ### Compute Backends
 

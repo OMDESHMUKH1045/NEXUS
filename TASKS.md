@@ -52,8 +52,10 @@ not speculative features.
 
 ## Analysis
 
-- [ ] Define operation interface and result metadata.
-- [ ] Implement descriptive statistics and quantiles.
+- [x] Define operation interface and result metadata (Phase 4A).
+- [x] Implement descriptive statistics and quantiles (Phase 4A).
+- [x] Define the explicit Phase 3 to analysis-table typing boundary (Phase 4A).
+- [x] Add focused Phase 4A correctness and contract tests.
 - [ ] Implement Pearson/Spearman correlation.
 - [ ] Implement IQR, Z-score, and modified Z-score outliers.
 - [ ] Implement group and multi-column aggregation.

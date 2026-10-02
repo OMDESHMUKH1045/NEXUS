@@ -52,6 +52,15 @@ next phase begins.
 
 ## Phase 4 — Analysis Engine
 
+### Phase 4A — Foundational CPU analysis (implemented)
+
+- [x] Define the typed `AnalysisTable`, `ColumnSchema`, limits, metadata,
+  operation protocol, and analysis errors.
+- [x] Add an explicit Phase 3 CSV/JSONL/SQLite adapter with deterministic
+  value typing.
+- [x] Implement bounded Welford descriptive statistics and exact quantiles.
+- [x] Add focused contract, numerical, source-boundary, and limit tests.
+
 - [ ] Implement deterministic statistics, correlations, outliers,
   aggregation, time-series operations, and transformations.
 - [ ] Define operation input/output metadata and validation.
