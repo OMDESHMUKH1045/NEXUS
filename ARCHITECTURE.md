@@ -65,8 +65,15 @@ two-column ranking. Correlation results are typed and pairwise complete.
 Phase 4C adds synchronous CPU-only IQR, Z-score, and modified Z-score
 outlier summaries with exact bounded valid-value materialization. Outlier
 results are typed; per-row transformations and persistence are not part of
-the analysis boundary. Aggregation, time-series operations, transformations,
-execution backends, and scheduling remain deferred.
+the analysis boundary. Phase 4D adds synchronous bounded grouped aggregation
+with one group key, one numeric measure, deterministic canonical ordering,
+and immutable group summaries. Group state and output cardinality are
+bounded by an explicit `max_groups` operation limit, whose conservative
+100,000 default matches the existing analysis row/materialization defaults;
+persistence and per-row output are not part of the analysis boundary.
+Multi-key/multi-measure aggregation,
+time-series operations, transformations, execution backends, and scheduling
+remain deferred.
 
 ### Compute Backends
 

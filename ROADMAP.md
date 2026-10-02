@@ -77,6 +77,16 @@ next phase begins.
 - [x] Define operation input/output metadata and validation across Phases 4A–4C.
 - [x] Add correctness tests against trusted small references across Phases 4A–4C.
 
+### Phase 4D — Bounded grouped aggregation (implemented)
+
+- [x] Define one-key/one-measure immutable aggregation results and statuses.
+- [x] Implement bounded grouped count, missing count, sum, mean, minimum,
+  and maximum with deterministic ordering.
+- [x] Add max-groups, source integration, numerical, and read-only tests.
+
+- [ ] Implement multi-key/multi-measure aggregation, time-series operations,
+  and transformations.
+
 ## Phase 5 — Scheduler
 
 - [ ] Implement typed jobs, bounded queues, priorities, cancellation,

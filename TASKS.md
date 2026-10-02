@@ -62,7 +62,10 @@ not speculative features.
 - [x] Define typed IQR, Z-score, and modified Z-score outlier contracts (Phase 4C).
 - [x] Implement bounded IQR, Z-score, and modified Z-score summaries (Phase 4C).
 - [x] Add outlier numerical, limit, and CSV/JSONL/SQLite integration tests (Phase 4C).
-- [ ] Implement group and multi-column aggregation.
+- [x] Define bounded one-key/one-measure aggregation contracts (Phase 4D).
+- [x] Implement grouped count, missing count, sum, mean, minimum, and maximum (Phase 4D).
+- [x] Add deterministic ordering, group-limit, and CSV/JSONL/SQLite tests (Phase 4D).
+- [ ] Implement multi-key/multi-measure aggregation.
 - [ ] Implement time-series resampling and rolling operations.
 - [ ] Implement transformations with deterministic behavior.
 - [ ] Add trusted correctness fixtures.

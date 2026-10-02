@@ -1,6 +1,13 @@
 """Foundational CPU analysis contracts and operations."""
 
 from .adapters import from_rows, from_source
+from .aggregation import (
+    AggregateGroup,
+    AggregationResult,
+    AggregationStatus,
+    GroupedAggregationOperation,
+    grouped_aggregation,
+)
 from .contracts import (
     AnalysisLimits,
     AnalysisOperation,
@@ -40,12 +47,16 @@ __all__ = [
     "AnalysisOperation",
     "AnalysisTable",
     "ColumnSchema",
+    "AggregateGroup",
+    "AggregationResult",
+    "AggregationStatus",
     "CorrelationMethod",
     "CorrelationResult",
     "CorrelationStatus",
     "DescriptiveStatistics",
     "DescriptiveStatisticsOperation",
     "ExactQuantileOperation",
+    "GroupedAggregationOperation",
     "InsufficientDataError",
     "InvalidAnalysisInputError",
     "OperationMetadata",
@@ -62,4 +73,5 @@ __all__ = [
     "pearson_correlation",
     "spearman_correlation",
     "detect_outliers",
+    "grouped_aggregation",
 ]
